@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Selenium WebDriver
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.18.1'
+
+    // Cucumber untuk Java
+    testImplementation 'io.cucumber:cucumber-java:7.15.0'
+
+    // Cucumber untuk JUnit (seperti tugas)
+    testImplementation 'io.cucumber:cucumber-junit:7.15.0'
+
+    // INI YANG BARU: Mesin penggerak (TestEngine) agar Gradle 8 tidak bingung
+    testImplementation 'org.junit.vintage:junit-vintage-engine:5.10.1'
+}
+
+// INI JUGA WAJIB DITAMBAHKAN: Memberitahu Gradle untuk pakai platform JUnit terbaru
+test {
+    useJUnitPlatform()
+}
+
+test {
+    useJUnitPlatform()
+}
