@@ -16,11 +16,12 @@ public class LoginSteps {
 
     @Given("Saya berada di halaman login SauceDemo")
     public void bukaHalamanLogin() {
-        // --- INI MANTRA SILUMANNYA ---
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
+        options.addArguments("--no-sandbox"); // Wajib untuk server Linux/GitHub
+        options.addArguments("--disable-dev-shm-usage"); // Mencegah Chrome kehabisan memori di server
+
         driver = new ChromeDriver(options);
-        // -----------------------------
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.saucedemo.com/");
