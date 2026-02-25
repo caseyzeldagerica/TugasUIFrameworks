@@ -1,0 +1,12 @@
+name: Robot Pertamaku
+
+# Kapan robot ini jalan? (Trigger)
+on: [push] 
+
+# Apa tugasnya? (Jobs)
+jobs:
+  sapa-cece:
+    runs-on: ubuntu-latest # Robot ini akan meminjam komputer Linux Ubuntu virtual
+    steps:
+      - name: Ucapkan Halo
+        run: echo "Halo Cece! Ini adalah bukti kalau robot GitHub Actions kamu sudah berhasil menyala otomatis!"

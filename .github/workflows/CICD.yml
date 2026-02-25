@@ -1,0 +1,41 @@
+name: Otomasi (API & UI Web)
+
+# 1. Kapan robot ini jalan? (Trigger: Sesuai instruksi tugas)
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  jalankan-tes-qa:
+    # 2. Tentukan Environment (Meminjam komputer Ubuntu Linux)
+    runs-on: ubuntu-latest 
+
+    steps:
+      # Langkah A: Robot mengambil kodinganmu dari GitHub
+      - name: Checkout Kode
+        uses: actions/checkout@v4
+
+      # Langkah B: Menginstal Java (Sesuai environment komputermu)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21' # Sesuai dengan Java yang kamu pakai kemarin
+          distribution: 'corretto' # Pakai Amazon Corretto seperti di IntelliJ-mu
+
+      # Langkah C: Memberi izin robot untuk mengeksekusi Gradle
+      - name: Izin Eksekusi Gradle
+        run: chmod +x gradlew
+
+      # Langkah D: Jalankan Tes Otomatisasi (Sesuai instruksi tugas)
+      - name: Jalankan Tes API dan UI Web
+        run: ./gradlew test
+
+      # Langkah E: Upload Laporan Hasil Pengujian sebagai Artefak (Sesuai instruksi)
+      - name: Upload Laporan Hasil Tes
+        if: always() # Penting: Tetap upload laporan walaupun ada tes yang gagal (merah)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Laporan-Tes
+          path: build/reports/tests/test/ # Ini adalah folder tempat laporan HTML-mu berada
