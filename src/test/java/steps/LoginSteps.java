@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions; // Ini tambahan import-nya
 import pages.LoginPage;
 
 import java.time.Duration;
@@ -15,7 +16,12 @@ public class LoginSteps {
 
     @Given("Saya berada di halaman login SauceDemo")
     public void bukaHalamanLogin() {
-        driver = new ChromeDriver();
+        // --- INI MANTRA SILUMANNYA ---
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        driver = new ChromeDriver(options);
+        // -----------------------------
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.saucedemo.com/");
         loginPage = new LoginPage(driver); // Inisialisasi POM
