@@ -17,15 +17,18 @@ public class LoginSteps {
     @Given("Saya berada di halaman login SauceDemo")
     public void bukaHalamanLogin() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--no-sandbox"); // Wajib untuk server Linux/GitHub
-        options.addArguments("--disable-dev-shm-usage"); // Mencegah Chrome kehabisan memori di server
+        options.addArguments("--headless=new"); // Pakai mode headless mesin Chrome versi terbaru
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu"); // Matikan akselerasi grafis yang sering bikin crash di Linux
+        options.addArguments("--window-size=1920,1080"); // Beri ukuran layar virtual agar elemen web tidak bertumpuk
+        options.addArguments("--remote-allow-origins=*"); // Buka izin akses penuh
 
         driver = new ChromeDriver(options);
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://www.saucedemo.com/");
-        loginPage = new LoginPage(driver); // Inisialisasi POM
+        loginPage = new LoginPage(driver);
     }
 
     @When("Saya memasukkan username {string} dan password {string}")
